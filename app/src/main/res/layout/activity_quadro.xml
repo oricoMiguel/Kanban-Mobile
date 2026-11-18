@@ -36,6 +36,18 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/btnOperador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_card"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:text="Operador ›"
+            android:textColor="#111111"
+            android:textSize="13sp" />
+
+        <TextView
             android:id="@+id/btnTempos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

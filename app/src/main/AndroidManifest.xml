@@ -28,6 +28,19 @@
             android:name=".logistica.TempoAtendimentoActivity"
             android:exported="false" />
 
+        <!-- Telas do operador -->
+        <activity
+            android:name=".operador.OperadorHomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.MeusCartoesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.CartaoDetalheActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

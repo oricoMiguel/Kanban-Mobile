@@ -22,6 +22,7 @@ import com.example.kanban.core.CartoesService;
 import com.example.kanban.core.Constantes;
 import com.example.kanban.core.Ouvinte;
 import com.example.kanban.core.SeedDados;
+import com.example.kanban.operador.OperadorHomeActivity;
 import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.ArrayList;
@@ -72,6 +73,9 @@ public class QuadroActivity extends AppCompatActivity {
         tabAberto.setOnClickListener(v -> trocarAba(Constantes.STATUS_ABERTO));
         tabEmRota.setOnClickListener(v -> trocarAba(Constantes.STATUS_EM_ROTA));
         tabEntregue.setOnClickListener(v -> trocarAba(Constantes.STATUS_ENTREGUE));
+        // Entrada provisória para o fluxo do operador (some quando existir a tela 5 / login)
+        findViewById(R.id.btnOperador).setOnClickListener(v ->
+                startActivity(new Intent(this, OperadorHomeActivity.class)));
         findViewById(R.id.btnTempos).setOnClickListener(v ->
                 startActivity(new Intent(this, TempoAtendimentoActivity.class)));
 

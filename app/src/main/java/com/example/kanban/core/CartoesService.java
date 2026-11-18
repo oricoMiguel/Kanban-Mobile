@@ -157,6 +157,24 @@ public class CartoesService {
                 });
     }
 
+    /** Telas do operador: um cartão ativo pelo id (lista vazia = não existe mais / foi concluído). */
+    public ListenerRegistration escutarCartao(String postoId, String insumoId, Ouvinte<Cartao> o) {
+        return db.collection(Constantes.COL_CARTOES)
+                .document(Constantes.idCartao(postoId, insumoId))
+                .addSnapshotListener((snap, e) -> {
+                    if (e != null) { o.aoErrar(e); return; }
+                    java.util.List<Cartao> lista = new java.util.ArrayList<>();
+                    if (snap != null && snap.exists()) lista.add(snap.toObject(Cartao.class));
+                    o.aoReceber(lista);
+                });
+    }
+
+    /** Leitura única de um posto (nome e setor para os cabeçalhos). Resultado é null se não existir. */
+    public Task<Posto> buscarPosto(String postoId) {
+        return db.collection(Constantes.COL_POSTOS).document(postoId).get()
+                .continueWith(task -> task.getResult().toObject(Posto.class));
+    }
+
     /** Tela 4. */
     public ListenerRegistration escutarPostos(Ouvinte<Posto> o) {
         return db.collection(Constantes.COL_POSTOS).orderBy("nome")
