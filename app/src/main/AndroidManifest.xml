@@ -18,6 +18,7 @@
 
         <activity
             android:name=".auth.LoginActivity"
+            android:theme="@style/Theme.Kanban.Formulario"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".logistica.QuadroActivity" android:exported="false" />
-        <activity android:name=".operador.PedirReposicaoActivity" android:exported="false" />
-        <activity android:name=".operador.LerQrActivity" android:exported="false" />
+        <activity android:name=".operador.PedirReposicaoActivity" android:theme="@style/Theme.Kanban.Formulario" android:exported="false" />
+        <activity android:name=".operador.LerQrActivity" android:theme="@style/Theme.Kanban.Formulario" android:exported="false" />
 
         <activity
             android:name=".logistica.TempoAtendimentoActivity"

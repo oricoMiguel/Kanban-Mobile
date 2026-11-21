@@ -51,12 +51,22 @@ public class LoginActivity extends AppCompatActivity {
     }
     private void renderizar() {
         boolean pronto = !model.perfil.isEmpty();
+        findViewById(R.id.perfilOperador).setSelected(Constantes.PERFIL_OPERADOR.equals(model.perfil));
+        findViewById(R.id.perfilLogistica).setSelected(Constantes.PERFIL_LOGISTICA.equals(model.perfil));
         findViewById(R.id.credenciais).setVisibility(pronto ? View.GONE : View.VISIBLE);
-        findViewById(R.id.escolherPosto).setVisibility(pronto ? View.VISIBLE : View.GONE);
+        entrar.setVisibility(pronto ? View.GONE : View.VISIBLE);
+        cadastrar.setVisibility(pronto ? View.GONE : View.VISIBLE);
+        continuar.setVisibility(pronto ? View.VISIBLE : View.GONE);
+        findViewById(R.id.sair).setVisibility(pronto ? View.VISIBLE : View.GONE);
+        posto.setEnabled(pronto);
         entrar.setEnabled(!model.ocupado); cadastrar.setEnabled(!model.ocupado);
         findViewById(R.id.progresso).setVisibility(model.ocupado ? View.VISIBLE : View.GONE);
         mensagem.setText(model.erro); mensagem.setVisibility(model.erro.isEmpty() ? View.GONE : View.VISIBLE);
-        if (!pronto) return;
+        if (!pronto) {
+            posto.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,
+                    new String[]{"Entre para escolher um posto"}));
+            return;
+        }
         if (Constantes.PERFIL_LOGISTICA.equals(model.perfil)) { concluir(""); return; }
         ArrayList<String> nomes = new ArrayList<>();
         for (Posto p : model.postos) nomes.add(p.nome + " · " + p.setor);

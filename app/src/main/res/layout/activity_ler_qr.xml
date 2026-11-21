@@ -1,18 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#F5F5F3" android:orientation="vertical">
-    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
-            <ImageButton android:id="@+id/voltar" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_arrow_back" android:contentDescription="Voltar" android:background="?attr/selectableItemBackgroundBorderless" />
-            <TextView style="@style/FormularioTitulo" android:text="Ler QR do posto" />
-            <ImageView android:layout_width="96dp" android:layout_height="96dp" android:layout_gravity="center_horizontal" android:src="@drawable/ic_qr" android:importantForAccessibility="no" app:tint="#2B5BA8" />
-            <Button android:id="@+id/abrirCamera" style="@style/FormularioBotao" android:text="Abrir câmera" />
-            <TextView style="@style/FormularioRotulo" android:text="Ou digite o código do posto" android:labelFor="@id/codigoPosto" />
-            <EditText android:id="@+id/codigoPosto" style="@style/FormularioCampo" android:hint="Ex.: posto07" android:inputType="textNoSuggestions" android:maxLines="1" android:importantForAutofill="no" />
-            <Button android:id="@+id/buscarCodigo" style="@style/FormularioBotao" android:text="Buscar posto" />
-            <TextView android:id="@+id/resultadoQr" style="@style/FormularioRotulo" android:text="Leia o QR para reconhecer o posto." android:accessibilityLiveRegion="polite" />
-            <Button android:id="@+id/pedirNestePosto" style="@style/FormularioBotao" android:text="Pedir reposição neste posto" android:enabled="false" />
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FAFAFA" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_form_panel" android:padding="20dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <ImageButton android:id="@+id/voltar" android:layout_width="40dp" android:layout_height="48dp" android:src="@drawable/ic_arrow_back" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Voltar"/>
+            <TextView style="@style/FormularioTitulo" android:text="Ler QR do posto" android:layout_width="0dp" android:layout_weight="1"/>
         </LinearLayout>
-    </ScrollView>
-    <include layout="@layout/view_bottom_nav" />
-</LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#EEEEEE" android:layout_marginTop="12dp"/>
+        <FrameLayout android:id="@+id/abrirCamera" android:layout_width="match_parent" android:layout_height="260dp" android:layout_marginTop="16dp" android:background="@drawable/bg_qr_idle" android:clickable="true" android:focusable="true" android:contentDescription="Abrir câmera para ler QR do posto">
+            <com.journeyapps.barcodescanner.BarcodeView android:id="@+id/cameraQr" android:layout_width="match_parent" android:layout_height="match_parent" android:visibility="gone"/>
+            <FrameLayout android:layout_width="150dp" android:layout_height="150dp" android:layout_gravity="center" android:background="@drawable/bg_qr_guide">
+                <ImageView android:layout_width="56dp" android:layout_height="56dp" android:src="@drawable/ic_qr" android:importantForAccessibility="no" android:id="@+id/qrIdle" android:layout_gravity="center" app:tint="#008B12"/>
+            </FrameLayout>
+            <TextView android:id="@+id/dicaCamera" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_gravity="bottom" android:gravity="center" android:padding="12dp" android:text="Toque para abrir a câmera" android:textSize="12sp" android:textColor="#555555"/>
+        </FrameLayout>
+        <LinearLayout android:id="@+id/faixaResultado" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:padding="14dp" android:orientation="vertical" android:background="@drawable/bg_qr_idle">
+            <TextView android:id="@+id/resultadoQr" style="@style/FormularioRotulo" android:text="Leia o QR para reconhecer o posto." android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:accessibilityLiveRegion="polite"/>
+            <androidx.appcompat.widget.AppCompatButton android:id="@+id/pedirNestePosto" style="@style/FormularioBotao" android:text="Pedir reposição neste posto" android:enabled="false"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton android:id="@+id/alternarCodigo" style="@style/FormularioBotao" android:text="Digitar código do posto" android:background="@drawable/bg_form_field" android:textColor="#333333"/>
+        <LinearLayout android:id="@+id/entradaManual" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:orientation="vertical" android:visibility="gone">
+            <androidx.appcompat.widget.AppCompatEditText android:id="@+id/codigoPosto" style="@style/FormularioCampo" android:hint="Ex.: posto07" android:inputType="textNoSuggestions" android:maxLines="1" android:contentDescription="Código do posto" android:importantForAutofill="no"/>
+            <androidx.appcompat.widget.AppCompatButton android:id="@+id/buscarCodigo" style="@style/FormularioBotao" android:text="Buscar posto"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

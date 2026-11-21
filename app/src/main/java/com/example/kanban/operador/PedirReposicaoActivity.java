@@ -7,7 +7,7 @@ import android.view.*;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.kanban.R;
 import com.example.kanban.core.*;
@@ -15,7 +15,7 @@ import com.example.kanban.core.*;
 public class PedirReposicaoActivity extends AppCompatActivity {
     private PedidoViewModel model;
     private String postoId;
-    private InsumosAdapter adapter;
+    private InsumosPedidoAdapter adapter;
     private boolean terminou;
     public static void abrir(Context c, String postoId) {
         c.startActivity(new Intent(c, PedirReposicaoActivity.class).putExtra("postoId", postoId));
@@ -36,8 +36,10 @@ public class PedirReposicaoActivity extends AppCompatActivity {
         findViewById(R.id.lerQr).setOnClickListener(v -> startActivity(new Intent(this, LerQrActivity.class)));
         findViewById(R.id.enviarPedido).setOnClickListener(v -> model.enviar());
         RecyclerView lista = findViewById(R.id.insumosPedido);
-        lista.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new InsumosAdapter(); lista.setAdapter(adapter);
+        lista.setLayoutManager(new GridLayoutManager(this,
+                getResources().getConfiguration().screenWidthDp < 340 ? 1 : 2));
+        adapter = new InsumosPedidoAdapter(id -> { model.selecionado = id; renderizar(); });
+        lista.setAdapter(adapter);
         RadioGroup urgencia = findViewById(R.id.urgenciaPedido);
         urgencia.check(Constantes.URGENCIA_ALTA.equals(model.urgencia) ? R.id.urgenciaAlta
                 : Constantes.URGENCIA_BAIXA.equals(model.urgencia) ? R.id.urgenciaBaixa : R.id.urgenciaMedia);
@@ -68,36 +70,17 @@ public class PedirReposicaoActivity extends AppCompatActivity {
         TextView status = findViewById(R.id.statusPedido);
         status.setText(!model.erro.isEmpty() ? model.erro : !model.pronto() ? "Carregando…"
                 : model.insumos.isEmpty() ? "Nenhum insumo vinculado a este posto." : "");
+        status.setVisibility(status.length() == 0 ? View.GONE : View.VISIBLE);
         Button enviar = findViewById(R.id.enviarPedido);
         enviar.setEnabled(model.pronto() && !model.insumos.isEmpty() && !model.enviando);
         enviar.setText(model.enviando ? "Enviando…" : "Pedir reposição");
         findViewById(R.id.urgenciaBaixa).setEnabled(!model.enviando);
         findViewById(R.id.urgenciaMedia).setEnabled(!model.enviando);
         findViewById(R.id.urgenciaAlta).setEnabled(!model.enviando);
-        adapter.notifyDataSetChanged();
+        adapter.atualizar(model.insumos, model.ativos, model.selecionado, model.enviando);
     }
     @Override protected void onSaveInstanceState(Bundle out) {
         if (model != null) { out.putString("insumo", model.selecionado); out.putString("urgencia", model.urgencia); }
         super.onSaveInstanceState(out);
-    }
-    private class InsumosAdapter extends RecyclerView.Adapter<InsumosAdapter.Holder> {
-        class Holder extends RecyclerView.ViewHolder {
-            final CheckedTextView texto;
-            Holder(CheckedTextView v) { super(v); texto = v; }
-        }
-        @Override public Holder onCreateViewHolder(ViewGroup parent, int type) {
-            return new Holder((CheckedTextView) getLayoutInflater().inflate(R.layout.item_insumo_pedido, parent, false));
-        }
-        @Override public void onBindViewHolder(Holder h, int position) {
-            Insumo i = model.insumos.get(position);
-            Cartao ativo = model.ativo(i.id);
-            h.texto.setText(i.nome + "\n" + (i.unidade == null ? "" : i.unidade)
-                    + (ativo == null ? "" : " · Já pedido há " + ativo.minutosAberto() + " min"));
-            h.texto.setEnabled(ativo == null && !model.enviando);
-            h.texto.setAlpha(ativo == null ? 1f : .5f);
-            h.texto.setChecked(ativo == null && i.id.equals(model.selecionado));
-            h.texto.setOnClickListener(v -> { model.selecionado = i.id; notifyDataSetChanged(); });
-        }
-        @Override public int getItemCount() { return model.insumos.size(); }
     }
 }

@@ -5,15 +5,20 @@ Branch: `feature/grupo-2-login-reposicao-qr`.
 
 O escopo segue a divisão **Pessoa 2** no Figma: login, pedir reposição e ler QR.
 O tema é **Kanban de Reposição (projeto 06)** do PDF; grupo 2 não significa implementar o projeto 02 (Checklist).
-As imagens do Figma orientam o fluxo. A prioridade desta entrega são os controles e o funcionamento.
+As três telas seguem a organização do [Figma do grupo 2](https://www.figma.com/design/55xiJ4hqcaTwbQWs4wbqG9/Kanban-Mobile?node-id=0-1): painel branco, campos com borda, botões pretos, cards de insumos em duas colunas, urgência amarela e confirmação do QR verde. A composição se adapta à largura do celular.
 
 <img src="images/login.png" alt="Tela de login do aplicativo executada no emulador Android" width="300" />
+
+Prévias dos componentes de reposição e QR, renderizados com dados locais de teste (não representam consultas ao Firebase compartilhado):
+
+<img src="images/pedido-fixture.png" alt="Prévia de reposição com quatro insumos de teste" width="300" />
+<img src="images/qr-fixture.png" alt="Prévia do estado de QR reconhecido com posto de teste" width="300" />
 
 ## Configuração local
 
 1. Abra esta pasta `Kanban-Mobile` no Android Studio, com JDK 17 ou superior, SDK 36 e acesso à internet para sincronizar o Gradle.
 2. Copie o `google-services.json` do projeto Firebase para `app/google-services.json`. O pacote é `com.example.kanban`. O arquivo está ignorado no Git.
-3. No Firebase Authentication, habilite **E-mail/senha**. O app permite criar uma conta e entrar com e-mail e senha. Matrícula e seleção livre de perfil do protótipo foram substituídas para atender NC1 e NC4 do PDF.
+3. No Firebase Authentication, habilite **E-mail/senha**. O app permite criar uma conta e entrar com e-mail e senha. Matrícula e seleção livre de perfil do protótipo foram adaptadas para atender NC1 e NC4 do PDF. Os cards de operador/logística explicam os acessos e destacam o perfil autenticado; não concedem permissões. O posto fica disponível após autenticar.
 4. Após criar a conta, copie o UID exibido e crie **pelo console** o documento `usuarios/{uid}` com `perfil: "operador"` ou `perfil: "logistica"`. O usuário não concede privilégios a si mesmo.
 5. Cadastre ao menos um `postos/{id}` com `nome`, `setor` e `ativo: true`; cadastre `insumos/{id}` com `nome`, `codigo`, `unidade` e `postoIds: ["id-do-posto"]`. Use os cadastros da equipe ou o console. O app não executa seeds automaticamente.
 6. Revise em conjunto `firestore.rules` e `firestore.indexes.json` antes de publicar no Firebase compartilhado. Eles acompanham o modelo atual do repositório e controlam leitura e gravação por perfil. A publicação não é feita automaticamente pelo app.
@@ -28,7 +33,7 @@ O operador escolhe entre os postos ativos após autenticar. A sessão do Firebas
 - Seleção e urgência sobrevivem à recriação da Activity. O ViewModel retém o envio em curso durante a rotação.
 - Em **Ler QR**, abra a câmera e permita o acesso. O leitor aceita QR com o ID do documento (`posto07`) ou `kanban://posto/posto07`. Também é possível digitar o mesmo código.
 - QR inválido, posto inexistente, posto inativo e falha de conexão não habilitam o botão de pedir. O pedido aberto usa o posto reconhecido, sem alterar o posto padrão da sessão.
-- O leitor utiliza ZXing Android Embedded. A câmera abre em uma tela própria e não depende de outro aplicativo de QR instalado.
+- O leitor utiliza ZXing Android Embedded. A imagem da câmera aparece dentro da própria tela, na área de leitura do QR. Negar a permissão mantém disponível a digitação do código. Não depende de outro aplicativo de QR instalado.
 
 ## Critérios de aceite desta entrega
 
@@ -60,7 +65,7 @@ python tools/test_firestore_rules.py --java java --emulator-jar caminho/cloud-fi
 
 Esse teste inicia um servidor em `127.0.0.1:8686`, usa somente o projeto fictício `demo-kanban-grupo2`, verifica 28 condições de acesso e encerra o servidor. Não utiliza credenciais nem dados do projeto compartilhado.
 
-Verificação local: compilação debug, 3 testes unitários, 5 testes de instrumentação no Android 17/API 37 e lint sem erros. O Espresso foi atualizado para a versão estável 3.7.0, compatível com o mecanismo de entrada desse emulador; essa alteração afeta somente os testes.
+Verificação local: compilação debug, 3 testes unitários, 6 testes de instrumentação no Android 17/API 37 e lint sem erros. O teste de UI dos cards confere a seleção e a indisponibilidade de insumos já pedidos usando o adapter real, além de gerar as prévias com dados locais. O Espresso foi atualizado para a versão estável 3.7.0, compatível com o mecanismo de entrada desse emulador; essa alteração afeta somente os testes.
 
 A demonstração entre dois aparelhos, a câmera física e a publicação das regras dependem da configuração compartilhada do Firebase e devem ser conferidas pelo grupo antes do merge.
 
