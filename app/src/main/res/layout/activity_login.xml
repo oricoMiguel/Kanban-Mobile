@@ -1,0 +1,27 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:background="#F5F5F3">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="24dp">
+        <ImageView android:layout_width="56dp" android:layout_height="56dp" android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_factory" android:importantForAccessibility="no" app:tint="#2B5BA8" />
+        <TextView style="@style/FormularioTitulo" android:text="Kanban de reposição" android:gravity="center" />
+        <TextView style="@style/FormularioRotulo" android:text="Insumo certo, no posto certo, na hora certa" android:gravity="center" />
+        <LinearLayout android:id="@+id/credenciais" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+            <TextView style="@style/FormularioRotulo" android:text="E-mail" android:labelFor="@id/email" />
+            <EditText android:id="@+id/email" style="@style/FormularioCampo" android:inputType="textEmailAddress" android:autofillHints="emailAddress" android:hint="seu@email.com" android:maxLines="1" />
+            <TextView style="@style/FormularioRotulo" android:text="Senha" android:labelFor="@id/senha" />
+            <EditText android:id="@+id/senha" style="@style/FormularioCampo" android:inputType="textPassword" android:autofillHints="password" android:hint="Senha" android:maxLines="1" android:saveEnabled="true" />
+            <Button android:id="@+id/entrar" style="@style/FormularioBotao" android:text="Entrar" />
+            <Button android:id="@+id/cadastrar" style="@style/FormularioBotao" android:text="Criar conta" />
+            <TextView style="@style/FormularioRotulo" android:text="O perfil de operador ou logística é liberado pelo grupo após o cadastro." />
+        </LinearLayout>
+        <LinearLayout android:id="@+id/escolherPosto" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
+            <TextView style="@style/FormularioRotulo" android:text="Posto de trabalho" android:labelFor="@id/posto" />
+            <Spinner android:id="@+id/posto" android:layout_width="match_parent" android:layout_height="48dp" />
+            <Button android:id="@+id/continuar" style="@style/FormularioBotao" android:text="Continuar como operador" />
+            <Button android:id="@+id/sair" style="@style/FormularioBotao" android:text="Sair da conta" />
+        </LinearLayout>
+        <ProgressBar android:id="@+id/progresso" android:layout_width="48dp" android:layout_height="48dp" android:layout_gravity="center" android:visibility="gone" />
+        <TextView android:id="@+id/mensagem" style="@style/FormularioRotulo" android:accessibilityLiveRegion="polite" android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>

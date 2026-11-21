@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#F5F5F3" android:orientation="vertical">
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <ImageButton android:id="@+id/voltar" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_arrow_back" android:contentDescription="Voltar" android:background="?attr/selectableItemBackgroundBorderless" />
+            <TextView style="@style/FormularioTitulo" android:text="Ler QR do posto" />
+            <ImageView android:layout_width="96dp" android:layout_height="96dp" android:layout_gravity="center_horizontal" android:src="@drawable/ic_qr" android:importantForAccessibility="no" app:tint="#2B5BA8" />
+            <Button android:id="@+id/abrirCamera" style="@style/FormularioBotao" android:text="Abrir câmera" />
+            <TextView style="@style/FormularioRotulo" android:text="Ou digite o código do posto" android:labelFor="@id/codigoPosto" />
+            <EditText android:id="@+id/codigoPosto" style="@style/FormularioCampo" android:hint="Ex.: posto07" android:inputType="textNoSuggestions" android:maxLines="1" android:importantForAutofill="no" />
+            <Button android:id="@+id/buscarCodigo" style="@style/FormularioBotao" android:text="Buscar posto" />
+            <TextView android:id="@+id/resultadoQr" style="@style/FormularioRotulo" android:text="Leia o QR para reconhecer o posto." android:accessibilityLiveRegion="polite" />
+            <Button android:id="@+id/pedirNestePosto" style="@style/FormularioBotao" android:text="Pedir reposição neste posto" android:enabled="false" />
+        </LinearLayout>
+    </ScrollView>
+    <include layout="@layout/view_bottom_nav" />
+</LinearLayout>

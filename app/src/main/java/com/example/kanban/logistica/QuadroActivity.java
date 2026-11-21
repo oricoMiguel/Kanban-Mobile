@@ -23,6 +23,7 @@ import com.example.kanban.core.Constantes;
 import com.example.kanban.core.Ouvinte;
 import com.example.kanban.core.SeedDados;
 import com.example.kanban.operador.OperadorHomeActivity;
+import com.example.kanban.operador.Sessao;
 import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class QuadroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!Sessao.exigir(this, Constantes.PERFIL_LOGISTICA)) return;
         setContentView(R.layout.activity_quadro);
 
         // Desce o conteúdo para não ficar embaixo da barra de status / barra de gestos
@@ -73,9 +75,8 @@ public class QuadroActivity extends AppCompatActivity {
         tabAberto.setOnClickListener(v -> trocarAba(Constantes.STATUS_ABERTO));
         tabEmRota.setOnClickListener(v -> trocarAba(Constantes.STATUS_EM_ROTA));
         tabEntregue.setOnClickListener(v -> trocarAba(Constantes.STATUS_ENTREGUE));
-        // Entrada provisória para o fluxo do operador (some quando existir a tela 5 / login)
         findViewById(R.id.btnOperador).setOnClickListener(v ->
-                startActivity(new Intent(this, OperadorHomeActivity.class)));
+                Sessao.sair(this));
         findViewById(R.id.btnTempos).setOnClickListener(v ->
                 startActivity(new Intent(this, TempoAtendimentoActivity.class)));
 
@@ -85,6 +86,7 @@ public class QuadroActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!Sessao.exigir(this, Constantes.PERFIL_LOGISTICA)) return;
         reg = CartoesService.get().escutarQuadro(new Ouvinte<Cartao>() {
             @Override public void aoReceber(List<Cartao> itens) {
                 todos = itens;

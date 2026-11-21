@@ -1,0 +1,23 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#F5F5F3" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+        <ImageButton android:id="@+id/voltar" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_arrow_back" android:contentDescription="Voltar" android:background="?attr/selectableItemBackgroundBorderless" />
+        <TextView style="@style/FormularioTitulo" android:layout_width="0dp" android:layout_weight="1" android:text="Pedir reposição" />
+        <ImageButton android:id="@+id/lerQr" android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_qr" android:contentDescription="Ler QR do posto" android:background="?attr/selectableItemBackgroundBorderless" />
+    </LinearLayout>
+    <TextView android:id="@+id/postoPedido" style="@style/FormularioRotulo" android:text="Posto de trabalho" />
+    <TextView style="@style/FormularioRotulo" android:text="O que está acabando?" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/insumosPedido" android:layout_width="match_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false" android:minHeight="80dp" />
+    <TextView android:id="@+id/statusPedido" style="@style/FormularioRotulo" android:accessibilityLiveRegion="polite" />
+    <TextView style="@style/FormularioRotulo" android:text="Qual a urgência?" />
+    <RadioGroup android:id="@+id/urgenciaPedido" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+        <RadioButton android:id="@+id/urgenciaBaixa" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Baixa" android:textColor="#111111" />
+        <RadioButton android:id="@+id/urgenciaMedia" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Média" android:textColor="#111111" />
+        <RadioButton android:id="@+id/urgenciaAlta" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:text="Alta" android:textColor="#111111" />
+    </RadioGroup>
+    <TextView android:id="@+id/ajudaUrgencia" style="@style/FormularioRotulo" />
+    <Button android:id="@+id/enviarPedido" style="@style/FormularioBotao" android:text="Pedir reposição" />
+</LinearLayout>
+</ScrollView>

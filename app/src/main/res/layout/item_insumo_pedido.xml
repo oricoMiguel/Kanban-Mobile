@@ -1,0 +1,5 @@
+<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="72dp"
+    android:padding="16dp" android:textSize="16sp" android:textColor="#111111" android:background="@drawable/bg_card"
+    android:layout_marginBottom="8dp" android:checkMark="?android:attr/listChoiceIndicatorSingle"
+    android:clickable="true" android:focusable="true" />
