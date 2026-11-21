@@ -1,0 +1,13 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "atendimentos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "postoId", "order": "ASCENDING" },
+        { "fieldPath": "concluidoEm", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

@@ -26,13 +26,17 @@ public final class NavInferior {
 
         // O início é a raiz do fluxo do operador: voltar para ele é só fechar as outras telas.
         a.findViewById(R.id.navInicio).setOnClickListener(v -> {
-            if (selecionado != INICIO) a.finish();
+            if (selecionado != INICIO) a.startActivity(new Intent(a, OperadorHomeActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
         });
         a.findViewById(R.id.navCartoes).setOnClickListener(v -> {
-            if (selecionado != CARTOES) a.startActivity(new Intent(a, MeusCartoesActivity.class));
+            if (selecionado != CARTOES) a.startActivity(new Intent(a, MeusCartoesActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
         });
-        a.findViewById(R.id.navQr).setOnClickListener(v ->
-                Toast.makeText(a, "Leitura de QR ainda não disponível", Toast.LENGTH_SHORT).show());
+        a.findViewById(R.id.navQr).setOnClickListener(v -> {
+            if (selecionado != QR) a.startActivity(new Intent(a, LerQrActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
+        });
     }
 
     private static void pintar(ImageView icone, TextView rotulo, boolean ativo) {

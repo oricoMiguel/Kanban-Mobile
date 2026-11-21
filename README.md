@@ -1,5 +1,7 @@
 # Kanban de Reposição
 
+Configuração do Firebase, telas de login/reposição/QR e roteiro de revisão: [entrega do grupo 2](docs/grupo-2.md).
+
 App mobile que substitui o grito, a luz e a ida pessoal ao almoxarifado. Quando um insumo está acabando no posto de montagem, o operador abre um cartão de reposição e a logística atende pelo quadro, vendo o que falta, onde e há quanto tempo.
 
 ## Perfis

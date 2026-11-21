@@ -43,7 +43,7 @@
             android:background="@drawable/bg_card"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
-            android:text="Operador ›"
+            android:text="Sair"
             android:textColor="#111111"
             android:textSize="13sp" />
 

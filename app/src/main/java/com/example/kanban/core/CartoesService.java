@@ -171,7 +171,7 @@ public class CartoesService {
 
     /** Leitura única de um posto (nome e setor para os cabeçalhos). Resultado é null se não existir. */
     public Task<Posto> buscarPosto(String postoId) {
-        return db.collection(Constantes.COL_POSTOS).document(postoId).get()
+        return db.collection(Constantes.COL_POSTOS).document(postoId).get(com.google.firebase.firestore.Source.SERVER)
                 .continueWith(task -> task.getResult().toObject(Posto.class));
     }
 

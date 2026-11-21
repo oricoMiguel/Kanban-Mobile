@@ -21,6 +21,8 @@ import com.example.kanban.core.Atendimento;
 import com.example.kanban.core.CartoesService;
 import com.example.kanban.core.Ouvinte;
 import com.example.kanban.core.ResumoTempo;
+import com.example.kanban.core.Constantes;
+import com.example.kanban.operador.Sessao;
 import com.google.firebase.firestore.ListenerRegistration;
 
 import java.util.List;
@@ -36,6 +38,7 @@ public class TempoAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!Sessao.exigir(this, Constantes.PERFIL_LOGISTICA)) return;
         setContentView(R.layout.activity_tempo_atendimento);
 
         // Desce o conteúdo para não ficar embaixo da barra de status / barra de gestos
@@ -71,6 +74,7 @@ public class TempoAtendimentoActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!Sessao.exigir(this, Constantes.PERFIL_LOGISTICA)) return;
         registrar();
     }
 

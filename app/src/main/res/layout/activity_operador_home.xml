@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Tela do operador: início do posto -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/raiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +22,7 @@
             android:importantForAccessibility="no"
             android:padding="12dp"
             android:src="@drawable/ic_factory"
-            android:tint="#2B5BA8" />
+            app:tint="#2B5BA8" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -49,11 +49,15 @@
         </LinearLayout>
 
         <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:importantForAccessibility="no"
+            android:id="@+id/contaOperador"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="10dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Opções da conta"
             android:src="@drawable/ic_account"
-            android:tint="#333333" />
+            app:tint="#333333" />
     </LinearLayout>
 
     <ScrollView
@@ -142,7 +146,7 @@
                     android:layout_height="24dp"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_add"
-                    android:tint="#FFFFFF" />
+                    app:tint="#FFFFFF" />
 
                 <TextView
                     android:layout_width="wrap_content"

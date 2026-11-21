@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * Detalhe do cartão com a linha do tempo "Andamento" (Aberto → Em rota → Entregue → Concluído).
- * "Ver como" alterna entre as ações do operador e as da logística (C4 / C5) no mesmo cartão.
+ * As ações disponíveis seguem o perfil autenticado (C4 / C5).
  */
 public class CartaoDetalheActivity extends AppCompatActivity {
 
@@ -64,6 +64,8 @@ public class CartaoDetalheActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!Sessao.exigir(this, null)) return;
+        perfil = Sessao.perfil(this);
         setContentView(R.layout.activity_cartao_detalhe);
 
         postoId = getIntent().getStringExtra(EXTRA_POSTO_ID);
@@ -85,8 +87,9 @@ public class CartaoDetalheActivity extends AppCompatActivity {
         btnAcao = findViewById(R.id.btnAcao);
 
         findViewById(R.id.btnVoltar).setOnClickListener(v -> finish());
-        tabOperador.setOnClickListener(v -> trocarPerfil(Constantes.PERFIL_OPERADOR));
-        tabLogistica.setOnClickListener(v -> trocarPerfil(Constantes.PERFIL_LOGISTICA));
+        tabOperador.setVisibility(View.GONE);
+        tabLogistica.setVisibility(View.GONE);
+        ((View) tabOperador.getParent()).setVisibility(View.GONE);
 
         CartoesService.get().buscarPosto(postoId).addOnSuccessListener(p -> {
             if (p == null) return;
@@ -98,6 +101,7 @@ public class CartaoDetalheActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!Sessao.exigir(this, null)) return;
         if (postoId == null) return;
         reg = CartoesService.get().escutarCartao(postoId, insumoId, new Ouvinte<Cartao>() {
             @Override public void aoReceber(List<Cartao> itens) {
@@ -123,11 +127,6 @@ public class CartaoDetalheActivity extends AppCompatActivity {
         super.onStop();
         if (reg != null) reg.remove();
         handler.removeCallbacks(tick);
-    }
-
-    private void trocarPerfil(String novo) {
-        perfil = novo;
-        renderizar();
     }
 
     private void marcar(TextView tab, boolean selecionada) {

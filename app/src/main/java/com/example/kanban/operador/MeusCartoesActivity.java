@@ -26,7 +26,7 @@ import java.util.List;
 /** Meus cartões: ativos do posto + concluídos hoje, em tempo real. Confirma recebimento (C5). */
 public class MeusCartoesActivity extends AppCompatActivity {
 
-    private final String postoId = Sessao.POSTO_ID;
+    private String postoId;
 
     private List<Cartao> ativos = new ArrayList<>();
     private List<Atendimento> concluidos = new ArrayList<>();
@@ -46,6 +46,8 @@ public class MeusCartoesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
+        postoId = Sessao.postoId(this);
         setContentView(R.layout.activity_meus_cartoes);
 
         Visual.ajustarInsets(findViewById(R.id.raiz), findViewById(R.id.navInferior));
@@ -67,6 +69,7 @@ public class MeusCartoesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
         CartoesService s = CartoesService.get();
 
         regCartoes = s.escutarCartoesDoPosto(postoId, new Ouvinte<Cartao>() {

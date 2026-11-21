@@ -15,7 +15,6 @@ import com.example.kanban.core.Atendimento;
 import com.example.kanban.core.Cartao;
 import com.example.kanban.core.CartoesService;
 import com.example.kanban.core.Constantes;
-import com.example.kanban.core.Insumo;
 import com.example.kanban.core.Ouvinte;
 import com.google.firebase.firestore.ListenerRegistration;
 
@@ -28,16 +27,15 @@ public class OperadorHomeActivity extends AppCompatActivity {
 
     private static final int MAX_EM_ANDAMENTO = 3;
 
-    private final String postoId = Sessao.POSTO_ID;
+    private String postoId;
     private String postoNome = "Posto";
 
     private List<Cartao> ativos = new ArrayList<>();
     private List<Atendimento> concluidos = new ArrayList<>();
-    private List<Insumo> insumos = new ArrayList<>();
 
     private TextView txtPostoNome, txtPostoSetor, txtAtivos, txtEntregues, txtVazio;
     private LinearLayout lista;
-    private ListenerRegistration regCartoes, regConcluidos, regInsumos;
+    private ListenerRegistration regCartoes, regConcluidos;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private final Runnable tick = new Runnable() {
@@ -50,6 +48,8 @@ public class OperadorHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
+        postoId = Sessao.postoId(this);
         setContentView(R.layout.activity_operador_home);
 
         Visual.ajustarInsets(findViewById(R.id.raiz), findViewById(R.id.navInferior));
@@ -63,7 +63,12 @@ public class OperadorHomeActivity extends AppCompatActivity {
         lista = findViewById(R.id.listaAndamento);
 
         findViewById(R.id.btnPedir).setOnClickListener(v ->
-                PedirReposicaoDialog.mostrar(this, postoId, postoNome, insumos, ativos));
+                PedirReposicaoActivity.abrir(this, postoId));
+        findViewById(R.id.contaOperador).setOnClickListener(v -> {
+            android.widget.PopupMenu menu = new android.widget.PopupMenu(this, v);
+            menu.getMenu().add("Sair da conta").setOnMenuItemClickListener(item -> { Sessao.sair(this); return true; });
+            menu.show();
+        });
         findViewById(R.id.btnVerTodos).setOnClickListener(v ->
                 startActivity(new Intent(this, MeusCartoesActivity.class)));
 
@@ -79,6 +84,7 @@ public class OperadorHomeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
         CartoesService s = CartoesService.get();
 
         regCartoes = s.escutarCartoesDoPosto(postoId, new Ouvinte<Cartao>() {
@@ -98,10 +104,6 @@ public class OperadorHomeActivity extends AppCompatActivity {
             // o erro no Logcat traz o link para criá-lo com um clique.
             @Override public void aoErrar(Exception e) { Visual.erro(OperadorHomeActivity.this, "Erro nos concluídos", e); }
         });
-        regInsumos = s.escutarInsumosDoPosto(postoId, new Ouvinte<Insumo>() {
-            @Override public void aoReceber(List<Insumo> itens) { insumos = itens; }
-            @Override public void aoErrar(Exception e) { Visual.erro(OperadorHomeActivity.this, "Erro nos insumos", e); }
-        });
         handler.postDelayed(tick, 30_000);
     }
 
@@ -110,7 +112,6 @@ public class OperadorHomeActivity extends AppCompatActivity {
         super.onStop();
         if (regCartoes != null) regCartoes.remove();
         if (regConcluidos != null) regConcluidos.remove();
-        if (regInsumos != null) regInsumos.remove();
         handler.removeCallbacks(tick);
     }
 
