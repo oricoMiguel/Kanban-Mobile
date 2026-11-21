@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#F8F8F6">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:paddingBottom="14dp">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Postos de trabalho" android:textSize="21sp" android:textStyle="bold" android:textColor="#111111"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gerencie os postos cadastrados" android:textSize="13sp" android:textColor="#777777"/>
+        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton android:id="@+id/btnAdicionar" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="Adicionar posto" android:src="@android:drawable/ic_input_add" android:tint="@android:color/white" android:backgroundTint="#111111"/>
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNovoInsumo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Cadastrar novo insumo"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#333333" />
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvPostos" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:clipToPadding="false" android:paddingTop="4dp" android:paddingBottom="8dp"/>
+</LinearLayout>

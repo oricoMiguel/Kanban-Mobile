@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="#F8F8F6">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:paddingBottom="14dp">
+        <TextView android:id="@+id/btnVoltar" android:layout_width="40dp" android:layout_height="40dp" android:gravity="center" android:text="‹" android:textSize="30sp" android:textColor="#222222" android:clickable="true" android:focusable="true"/>
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:id="@+id/txtPosto" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Posto 07" android:textSize="19sp" android:textStyle="bold" android:textColor="#111111"/>
+            <TextView android:id="@+id/txtSubtitulo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Montagem final" android:textSize="12sp" android:textColor="#777777"/>
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="10dp" app:cardElevation="0dp" app:strokeColor="#E1E1DE" app:strokeWidth="1dp" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="14dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Adicionar insumo" android:textStyle="bold" android:textColor="#222222"/>
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:layout_marginTop="7dp">
+                <EditText android:id="@+id/txtNovoInsumo" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:hint="Nome do insumo" android:paddingHorizontal="12dp"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnAdicionar" android:layout_width="wrap_content" android:layout_height="48dp" android:layout_marginStart="8dp" android:text="Adicionar" android:textAllCaps="false" android:textSize="12sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="18dp" android:text="Insumos deste posto" android:textStyle="bold" android:textSize="15sp" android:textColor="#222222"/>
+    <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvInsumos" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:layout_marginTop="8dp" android:clipToPadding="false" android:paddingBottom="8dp"/>
+</LinearLayout>

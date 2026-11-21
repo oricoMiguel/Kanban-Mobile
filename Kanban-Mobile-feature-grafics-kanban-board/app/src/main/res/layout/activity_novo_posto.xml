@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#F8F8F6">
+    <LinearLayout android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:paddingBottom="14dp">
+            <TextView android:id="@+id/btnFechar" android:layout_width="40dp" android:layout_height="40dp" android:gravity="center" android:text="×" android:textSize="25sp" android:textColor="#222222" android:clickable="true" android:focusable="true"/>
+            <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Novo posto" android:textStyle="bold" android:textSize="20sp" android:textColor="#111111"/>
+        </LinearLayout>
+        <com.google.android.material.card.MaterialCardView android:layout_width="match_parent" android:layout_height="wrap_content" app:cardCornerRadius="12dp" app:cardElevation="0dp" app:strokeColor="#E3E3DF" app:strokeWidth="1dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="18dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Nome do posto" android:textStyle="bold"/>
+                <EditText android:id="@+id/txtNome" android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginTop="6dp" android:hint="Ex.: Posto 14" android:paddingHorizontal="12dp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="14dp" android:text="Setor" android:textStyle="bold"/>
+                <Spinner android:id="@+id/spSetor" android:layout_width="match_parent" android:layout_height="50dp" android:layout_marginTop="6dp"/>
+                <CheckBox android:id="@+id/chkAtivo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:text="Posto ativo" android:checked="true"/>
+                <com.google.android.material.button.MaterialButton android:id="@+id/btnSalvar" android:layout_width="match_parent" android:layout_height="52dp" android:layout_marginTop="12dp" android:text="Salvar posto" android:textAllCaps="false" android:textStyle="bold" android:textColor="@android:color/white" android:backgroundTint="#111111" app:cornerRadius="8dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>
