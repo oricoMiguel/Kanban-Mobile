@@ -123,7 +123,7 @@ git clone https://github.com/oricoMiguel/Kanban-Mobile.git
 Entre na pasta do projeto:
 
 ```bash
-cd Kanban-Mobile-develop
+cd Kanban-Mobile
 ```
 
 Abra o projeto no Android Studio.
