@@ -403,12 +403,9 @@ Adicionar as imagens na pasta `docs/screenshots/` e inserir os arquivos abaixo n
 | Login | `docs/screenshots/login.png` |
 | Cadastro de usuário | `docs/screenshots/cadastro.png` |
 | Tela do operador | `docs/screenshots/operador.png` |
-| Seleção de posto | `docs/screenshots/postos.png` |
 | Cadastro de insumo | `docs/screenshots/novo-insumo.png` |
-| Cadastro de posto | `docs/screenshots/novo-posto.png` |
 | Quadro da logística | `docs/screenshots/quadro-logistica.png` |
 | Cartões em atendimento | `docs/screenshots/cartoes.png` |
-| Confirmação de recebimento | `docs/screenshots/confirmacao.png` |
 
 Exemplo de inclusão de uma imagem:
 
