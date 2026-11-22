@@ -1,19 +1,124 @@
 # Kanban de Reposição
 
-App mobile que substitui o grito, a luz e a ida pessoal ao almoxarifado. Quando um insumo está acabando no posto de montagem, o operador abre um cartão de reposição e a logística atende pelo quadro, vendo o que falta, onde e há quanto tempo.
+Aplicativo mobile desenvolvido para otimizar a comunicação entre os operadores de linha e a equipe de logística em ambientes de produção.
 
-## Perfis
+O aplicativo substitui a comunicação informal, como gritos, sinais luminosos e deslocamentos até o almoxarifado. Quando um insumo está acabando em um posto de montagem, o operador abre um cartão de reposição pelo aplicativo. A equipe de logística acompanha os pedidos em um quadro e realiza o atendimento.
 
-- **Operador de linha:** sinaliza a falta abrindo um cartão e confirma o recebimento.
-- **Logística:** cadastra postos e insumos, vê o quadro e move os cartões.
+## Objetivo
+
+Facilitar a solicitação e o acompanhamento da reposição de insumos, permitindo visualizar o que está faltando, em qual posto e há quanto tempo o pedido está aberto.
+
+## Perfis de acesso
+
+- **Operador de linha:** visualiza os insumos disponíveis para seu posto, abre cartões de reposição e confirma o recebimento dos materiais.
+- **Logística:** cadastra postos de trabalho e insumos, acompanha o quadro de reposição e movimenta os cartões conforme o andamento das entregas.
+
+Os novos usuários são cadastrados automaticamente como operadores. As contas com perfil de logística são autorizadas manualmente no Firebase.
 
 ## Fluxo do cartão
 
 **Aberto → Em rota → Entregue → Concluído**
 
-A logística move o cartão até **Entregue**. Somente o operador conclui, ao confirmar o recebimento.
+1. O operador abre um cartão solicitando a reposição de um insumo.
+2. A logística visualiza o pedido na coluna **Aberto**.
+3. Ao iniciar o atendimento, move o cartão para **Em rota**.
+4. Quando o material é entregue, move o cartão para **Entregue**.
+5. O operador confirma o recebimento, concluindo o atendimento.
+
+Somente o operador confirma o recebimento do material. Até essa confirmação, o cartão permanece aguardando conclusão.
 
 ---
+
+## Tecnologias utilizadas
+
+- **Java:** linguagem utilizada no desenvolvimento do aplicativo Android.
+- **Android Studio:** ambiente de desenvolvimento.
+- **Firebase Authentication:** autenticação dos usuários.
+- **Cloud Firestore:** armazenamento dos dados e atualização em tempo real.
+- **Git e GitHub:** versionamento e colaboração no desenvolvimento.
+
+## Funcionalidades
+
+- Cadastro e autenticação de usuários.
+- Controle de acesso por perfil.
+- Cadastro e gerenciamento de postos de trabalho.
+- Cadastro de insumos e associação aos postos.
+- Solicitação de reposição pelo operador.
+- Prevenção de cartões duplicados para o mesmo insumo e posto.
+- Quadro de acompanhamento da logística.
+- Movimentação dos cartões entre os status.
+- Confirmação de recebimento pelo operador.
+- Registro de horários e tempo de atendimento.
+- Acompanhamento dos atendimentos concluídos.
+
+## Pré-requisitos
+
+Para executar o projeto, é necessário:
+
+- Android Studio instalado.
+- Git instalado.
+- Acesso à internet.
+- Um dispositivo Android ou emulador compatível.
+- Um projeto Firebase configurado para o aplicativo.
+
+## Como executar o projeto
+
+1. Clone o repositório:
+
+   ```bash
+   git clone URL_DO_REPOSITORIO
+   ```
+
+2. Abra o projeto clonado no Android Studio.
+
+3. Configure o Firebase conforme as instruções da próxima seção.
+
+4. Aguarde a sincronização do Gradle.
+
+5. Selecione um dispositivo Android ou emulador.
+
+6. Execute o aplicativo pelo Android Studio.
+
+## Configuração do Firebase
+
+O projeto utiliza Firebase Authentication e Cloud Firestore.
+
+Para configurar o ambiente:
+
+1. Crie ou utilize um projeto no Firebase Console.
+2. Registre o aplicativo Android utilizando o identificador de pacote do projeto.
+3. Baixe o arquivo `google-services.json`.
+4. Coloque o arquivo na pasta `app/` do projeto.
+5. Ative o Firebase Authentication com o método de autenticação utilizado pelo aplicativo.
+6. Crie o banco de dados Cloud Firestore.
+7. Configure e publique as regras de segurança do Firestore.
+
+### Perfis de acesso
+
+Os perfis são armazenados na coleção `usuarios`, no documento correspondente ao UID do usuário autenticado.
+
+O campo `perfil` identifica o tipo de acesso:
+
+- `operador`
+- `logistica`
+
+Novos cadastros recebem automaticamente o perfil `operador`. O acesso de logística é concedido manualmente pelo grupo, diretamente no Firebase.
+
+O usuário não escolhe o próprio perfil durante o cadastro.
+
+**Importante:** não compartilhe arquivos de configuração privados, senhas ou credenciais de acesso no repositório.
+
+## Estrutura de dados
+
+O aplicativo utiliza as seguintes coleções principais no Cloud Firestore:
+
+| Coleção | Finalidade |
+|---|---|
+| `usuarios` | Dados e perfis dos usuários |
+| `postos` | Cadastro dos postos de trabalho |
+| `insumos` | Cadastro dos insumos e seus vínculos com os postos |
+| `cartoes` | Solicitações de reposição em andamento |
+| `atendimentos` | Histórico de atendimentos concluídos |
 
 ## ES1: Histórias de usuário
 
@@ -107,3 +212,17 @@ O backlog fica no [GitHub Projects](https://github.com/users/oricoMiguel/project
 | #4 | C4: Quadro e movimentação dos cartões | a definir |
 | #5 | C5: Confirmação de recebimento | a definir |
 | #6 | C6: Horários e tempo em aberto | a definir |
+
+---
+
+## Requisitos não funcionais
+
+Além das funcionalidades principais, o projeto considera requisitos de autenticação, segurança, persistência de dados, usabilidade e preservação do estado das telas.
+
+A validação desses requisitos é realizada por meio de testes no aplicativo e revisão da implementação.
+
+## Equipe e desenvolvimento
+
+Projeto desenvolvido em equipe, com colaboração por meio de branches, commits, issues e GitHub Projects.
+
+As alterações são integradas e testadas antes de serem incorporadas à versão principal do projeto.
