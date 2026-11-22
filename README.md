@@ -206,12 +206,12 @@ O backlog fica no [GitHub Projects](https://github.com/users/oricoMiguel/project
 
 | Issue | Título | Responsável |
 |---|---|---|
-| #1 | C1: Cadastro de postos e insumos | a definir |
-| #2 | C2: Abrir cartão de reposição | a definir |
-| #3 | C3: Sem cartões duplicados | a definir |
-| #4 | C4: Quadro e movimentação dos cartões | a definir |
-| #5 | C5: Confirmação de recebimento | a definir |
-| #6 | C6: Horários e tempo em aberto | a definir |
+| #1 | C1: Cadastro de postos e insumos | Matheus & Quézia |
+| #2 | C2: Abrir cartão de reposição | Akemi & Quézia |
+| #3 | C3: Sem cartões duplicados | Akemi & Quézia |
+| #4 | C4: Quadro e movimentação dos cartões | Miguel |
+| #5 | C5: Confirmação de recebimento | Miguel |
+| #6 | C6: Horários e tempo em aberto | Akemi |
 
 ---
 
