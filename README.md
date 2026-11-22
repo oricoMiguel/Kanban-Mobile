@@ -398,14 +398,14 @@ Esta seção deve apresentar capturas de tela das principais funcionalidades do 
 
 Adicionar as imagens na pasta `docs/screenshots/` e inserir os arquivos abaixo no README:
 
-| Tela | Arquivo sugerido |
+| Tela | Arquivo |
 |---|---|
-| Login | `docs/screenshots/login.png` |
-| Cadastro de usuário | `docs/screenshots/cadastro.png` |
-| Tela do operador | `docs/screenshots/operador.png` |
-| Cadastro de insumo | `docs/screenshots/novo-insumo.png` |
-| Quadro da logística | `docs/screenshots/quadro-logistica.png` |
-| Cartões em atendimento | `docs/screenshots/cartoes.png` |
+| Tela de login | `docs/screenshots/login.jpeg` |
+| Cadastro de usuário | `docs/screenshots/cadastro.jpeg` |
+| Tela do operador | `docs/screenshots/operador.jpeg` |
+| Cadastro de insumo | `docs/screenshots/novo-insumo.jpeg` |
+| Quadro da logística | `docs/screenshots/quadro-logistica.jpeg` |
+| Cartões em atendimento | `docs/screenshots/cartoes.jpeg` |
 
 Exemplo de inclusão de uma imagem:
 
