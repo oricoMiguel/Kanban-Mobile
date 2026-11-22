@@ -117,7 +117,7 @@ Para abrir e executar o projeto, são necessários:
 No terminal, execute:
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/oricoMiguel/Kanban-Mobile.git
 ```
 
 Entre na pasta do projeto:
