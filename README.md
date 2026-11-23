@@ -394,24 +394,27 @@ Além das funcionalidades principais, o aplicativo contempla os seguintes requis
 
 ## 13. Evidências do aplicativo
 
-Esta seção deve apresentar capturas de tela das principais funcionalidades do aplicativo.
+As imagens abaixo apresentam as principais telas e funcionalidades do aplicativo.
 
-Adicionar as imagens na pasta `docs/screenshots/` e inserir os arquivos abaixo no README:
+### Tela de login
+![Tela de login](docs/screenshots/login.jpeg)
 
-| Tela | Arquivo |
-|---|---|
-| Tela de login | `docs/screenshots/login.jpeg` |
-| Cadastro de usuário | `docs/screenshots/cadastro.jpeg` |
-| Tela do operador | `docs/screenshots/operador.jpeg` |
-| Cadastro de insumo | `docs/screenshots/novo-insumo.jpeg` |
-| Quadro da logística | `docs/screenshots/quadro-logistica.jpeg` |
-| Cartões em atendimento | `docs/screenshots/cartoes.jpeg` |
+### Cadastro de usuário
+![Cadastro de usuário](docs/screenshots/cadastro.jpeg)
 
-Exemplo de inclusão de uma imagem:
+### Tela do operador
+![Tela do operador](docs/screenshots/operador.jpeg)
 
-```markdown
-![Quadro da logística](docs/screenshots/quadro-logistica.png)
-```
+### Cadastro de insumo
+![Cadastro de insumo](docs/screenshots/novo-insumo.jpeg)
+
+### Quadro da logística
+![Quadro da logística](docs/screenshots/quadro-logistica.jpeg)
+
+### Cartões em atendimento
+![Cartões em atendimento](docs/screenshots/cartoes.jpeg)
+
+As capturas mostram telas reais do aplicativo, sem expor senhas ou informações privadas.
 
 As capturas devem mostrar as telas reais do aplicativo, sem expor senhas, dados pessoais ou informações privadas.
 
