@@ -185,11 +185,11 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaAndamento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:id="@+id/txtVazio"

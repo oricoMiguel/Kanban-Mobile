@@ -51,11 +51,11 @@
                 android:textColor="#777777"
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaAtivos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:id="@+id/txtVazioAtivos"
@@ -78,11 +78,11 @@
                 android:textColor="#777777"
                 android:textSize="14sp" />
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listaConcluidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:nestedScrollingEnabled="false" />
 
             <TextView
                 android:id="@+id/txtVazioConcluidos"

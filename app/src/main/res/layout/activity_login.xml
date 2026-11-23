@@ -1,39 +1,246 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FAFAFA" android:fillViewport="true">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_form_panel" android:padding="20dp">
-        <ImageView android:layout_width="48dp" android:layout_height="48dp" android:src="@drawable/ic_kanban_form" android:importantForAccessibility="no" android:layout_gravity="center" android:background="@drawable/bg_icon_box" android:padding="10dp" app:tint="#2B5BA8"/>
-        <TextView style="@style/FormularioTitulo" android:text="Kanban de reposição" android:layout_marginTop="12dp" android:gravity="center"/>
-        <TextView style="@style/FormularioRotulo" android:text="Insumo certo, no posto certo, na hora certa" android:layout_marginTop="2dp" android:gravity="center" android:textSize="12sp"/>
-        <TextView style="@style/FormularioSecao" android:text="Perfis de acesso"/>
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
-            <LinearLayout android:id="@+id/perfilOperador" android:layout_width="0dp" android:layout_height="108dp" android:layout_weight="1" android:background="@drawable/bg_insumo_tile" android:orientation="vertical" android:gravity="center" android:padding="8dp">
-                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_account" android:importantForAccessibility="no"/>
-                <TextView style="@style/FormularioSecao" android:text="Operador de linha" android:layout_marginTop="6dp" android:layout_marginBottom="2dp" android:gravity="center"/>
-                <TextView style="@style/FormularioRotulo" android:text="Pede reposição" android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:gravity="center" android:textSize="12sp"/>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_form_panel"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_kanban_form"
+            android:importantForAccessibility="no"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_icon_box"
+            android:padding="10dp"
+            app:tint="#2B5BA8"/>
+
+        <TextView
+            style="@style/FormularioTitulo"
+            android:text="Kanban de reposição"
+            android:layout_marginTop="12dp"
+            android:gravity="center"/>
+
+        <TextView
+            style="@style/FormularioRotulo"
+            android:text="Insumo certo, no posto certo, na hora certa"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:textSize="12sp"/>
+
+        <TextView
+            style="@style/FormularioSecao"
+            android:text="Perfis de acesso"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/perfilOperador"
+                android:layout_width="0dp"
+                android:layout_height="108dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_insumo_tile"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_account"
+                    android:importantForAccessibility="no"/>
+
+                <TextView
+                    style="@style/FormularioSecao"
+                    android:text="Operador de linha"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    style="@style/FormularioRotulo"
+                    android:text="Pede reposição"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:textSize="12sp"/>
             </LinearLayout>
-            <Space android:layout_width="10dp" android:layout_height="1dp"/>
-            <LinearLayout android:id="@+id/perfilLogistica" android:layout_width="0dp" android:layout_height="108dp" android:layout_weight="1" android:background="@drawable/bg_insumo_tile" android:orientation="vertical" android:gravity="center" android:padding="8dp">
-                <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_logistica_form" android:importantForAccessibility="no"/>
-                <TextView style="@style/FormularioSecao" android:text="Logística" android:layout_marginTop="6dp" android:layout_marginBottom="2dp" android:gravity="center"/>
-                <TextView style="@style/FormularioRotulo" android:text="Repõe os insumos" android:layout_marginTop="0dp" android:layout_marginBottom="0dp" android:gravity="center" android:textSize="12sp"/>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="1dp"/>
+
+            <LinearLayout
+                android:id="@+id/perfilLogistica"
+                android:layout_width="0dp"
+                android:layout_height="108dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_insumo_tile"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_logistica_form"
+                    android:importantForAccessibility="no"/>
+
+                <TextView
+                    style="@style/FormularioSecao"
+                    android:text="Logística"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="2dp"
+                    android:gravity="center"/>
+
+                <TextView
+                    style="@style/FormularioRotulo"
+                    android:text="Repõe os insumos"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:textSize="12sp"/>
             </LinearLayout>
         </LinearLayout>
-        <LinearLayout android:id="@+id/credenciais" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-            <TextView style="@style/FormularioSecao" android:text="E-mail" android:labelFor="@id/email"/>
-            <androidx.appcompat.widget.AppCompatEditText android:id="@+id/email" style="@style/FormularioCampo" android:hint="seu@email.com" android:inputType="textEmailAddress" android:maxLines="1" android:autofillHints="emailAddress"/>
-            <TextView style="@style/FormularioSecao" android:text="Senha" android:labelFor="@id/senha"/>
-            <androidx.appcompat.widget.AppCompatEditText android:id="@+id/senha" style="@style/FormularioCampo" android:hint="Sua senha" android:inputType="textPassword" android:maxLines="1" android:autofillHints="password" android:saveEnabled="true"/>
+
+        <LinearLayout
+            android:id="@+id/credenciais"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/dadosCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/FormularioSecao"
+                    android:text="Nome completo"
+                    android:labelFor="@id/nome"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/nome"
+                    style="@style/FormularioCampo"
+                    android:hint="Digite seu nome completo"
+                    android:inputType="textPersonName|textCapWords"
+                    android:maxLines="1"
+                    android:autofillHints="name"/>
+
+                <TextView
+                    style="@style/FormularioSecao"
+                    android:text="Matrícula"
+                    android:labelFor="@id/matricula"/>
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/matricula"
+                    style="@style/FormularioCampo"
+                    android:hint="Digite sua matrícula"
+                    android:inputType="text"
+                    android:maxLines="1"/>
+            </LinearLayout>
+
+            <TextView
+                style="@style/FormularioSecao"
+                android:text="E-mail"
+                android:labelFor="@id/email"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/email"
+                style="@style/FormularioCampo"
+                android:hint="seu@email.com"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:autofillHints="emailAddress"/>
+
+            <TextView
+                style="@style/FormularioSecao"
+                android:text="Senha"
+                android:labelFor="@id/senha"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/senha"
+                style="@style/FormularioCampo"
+                android:hint="Sua senha"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:autofillHints="password"
+                android:saveEnabled="true"/>
         </LinearLayout>
-        <LinearLayout android:id="@+id/escolherPosto" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-            <TextView style="@style/FormularioSecao" android:text="Posto de trabalho" android:labelFor="@id/posto"/>
-            <Spinner android:id="@+id/posto" android:layout_width="match_parent" android:layout_height="48dp" android:background="@drawable/bg_form_field"/>
+
+        <LinearLayout
+            android:id="@+id/escolherPosto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/FormularioSecao"
+                android:text="Posto de trabalho"
+                android:labelFor="@id/posto"/>
+
+            <Spinner
+                android:id="@+id/posto"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_form_field"/>
         </LinearLayout>
-        <androidx.appcompat.widget.AppCompatButton android:id="@+id/entrar" style="@style/FormularioBotao" android:text="Entrar"/>
-        <androidx.appcompat.widget.AppCompatButton android:id="@+id/cadastrar" style="@style/FormularioBotao" android:text="Criar conta" android:background="@drawable/bg_form_field" android:textColor="#111111" android:layout_marginTop="8dp"/>
-        <androidx.appcompat.widget.AppCompatButton android:id="@+id/continuar" style="@style/FormularioBotao" android:text="Entrar" android:visibility="gone"/>
-        <androidx.appcompat.widget.AppCompatButton android:id="@+id/sair" style="@style/FormularioBotao" android:text="Sair da conta" android:background="@drawable/bg_form_field" android:textColor="#111111" android:visibility="gone"/>
-        <TextView style="@style/FormularioRotulo" android:text="Seu perfil é definido pelo grupo após o cadastro." android:textSize="12sp"/>
-        <ProgressBar android:id="@+id/progresso" android:layout_width="40dp" android:layout_height="40dp" android:layout_gravity="center" android:visibility="gone"/>
-        <TextView android:id="@+id/mensagem" style="@style/FormularioRotulo" android:accessibilityLiveRegion="polite" android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/entrar"
+            style="@style/FormularioBotao"
+            android:text="Entrar"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cadastrar"
+            style="@style/FormularioBotao"
+            android:text="Criar conta"
+            android:background="@drawable/bg_form_field"
+            android:textColor="#111111"
+            android:layout_marginTop="8dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/continuar"
+            style="@style/FormularioBotao"
+            android:text="Entrar"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sair"
+            style="@style/FormularioBotao"
+            android:text="Sair da conta"
+            android:background="@drawable/bg_form_field"
+            android:textColor="#111111"
+            android:visibility="gone"/>
+
+        <TextView
+            style="@style/FormularioRotulo"
+            android:text="O perfil de acesso é definido pelo grupo."
+            android:textSize="12sp"/>
+
+        <ProgressBar
+            android:id="@+id/progresso"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/mensagem"
+            style="@style/FormularioRotulo"
+            android:accessibilityLiveRegion="polite"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>

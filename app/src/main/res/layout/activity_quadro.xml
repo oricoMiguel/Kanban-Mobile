@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/raiz"
     android:layout_width="match_parent"
@@ -7,6 +6,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Cabeçalho -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,6 +59,23 @@
             android:textSize="13sp" />
     </LinearLayout>
 
+    <!-- Botão para gerenciar postos e insumos -->
+    <TextView
+        android:id="@+id/btnGerenciarPostos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_card"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="14dp"
+        android:text="Gerenciar postos e insumos  ›"
+        android:textColor="#111111"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <!-- Abas do quadro -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -98,6 +115,7 @@
             android:textSize="13sp" />
     </LinearLayout>
 
+    <!-- Mensagem quando não houver cartões -->
     <TextView
         android:id="@+id/txtVazio"
         android:layout_width="match_parent"
@@ -108,6 +126,7 @@
         android:textColor="#888888"
         android:visibility="gone" />
 
+    <!-- Lista de cartões -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCartoes"
         android:layout_width="match_parent"
@@ -115,4 +134,5 @@
         android:layout_marginTop="12dp"
         android:layout_weight="1"
         android:clipToPadding="false" />
+
 </LinearLayout>

@@ -116,6 +116,7 @@ public class LerQrActivity extends AppCompatActivity {
             consultando = false; controles(true);
             if (p == null || !p.ativo) { mensagem("Posto não encontrado ou inativo.", false); return; }
             reconhecido = p.id; mensagem("✓ QR reconhecido\n" + p.nome + " · " + p.setor, true); pedir.setEnabled(true);
+            android.util.Log.d("TESTE_QR", "ID reconhecido: " + reconhecido);
         }).addOnFailureListener(e -> {
             if (isDestroyed()) return;
             consultando = false; controles(true);

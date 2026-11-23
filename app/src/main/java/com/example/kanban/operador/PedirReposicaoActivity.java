@@ -26,6 +26,7 @@ public class PedirReposicaoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pedir_reposicao);
         Visual.ajustarInsets(findViewById(R.id.raiz), null);
         postoId = getIntent().getStringExtra("postoId");
+        android.util.Log.d("TESTE_QR", "ID recebido na tela de pedido: " + postoId);
         if (postoId == null || postoId.isEmpty()) { finish(); return; }
         model = new ViewModelProvider(this).get(PedidoViewModel.class);
         if (state != null) {

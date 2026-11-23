@@ -1,3 +1,4 @@
+
 package com.example.kanban.operador;
 
 import android.content.Intent;
@@ -5,12 +6,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kanban.R;
+import com.example.kanban.auth.LoginActivity;
 import com.example.kanban.core.Atendimento;
 import com.example.kanban.core.Cartao;
 import com.example.kanban.core.CartoesService;
@@ -22,10 +26,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/** Início do operador: resumo do posto, pedir reposição e cartões em andamento (tempo real). */
 public class OperadorHomeActivity extends AppCompatActivity {
 
-    private static final int MAX_EM_ANDAMENTO = 3;
+    private static final int MAX_EM_ANDAMENTO = 5;
 
     private String postoId;
     private String postoNome = "Posto";
@@ -33,14 +36,20 @@ public class OperadorHomeActivity extends AppCompatActivity {
     private List<Cartao> ativos = new ArrayList<>();
     private List<Atendimento> concluidos = new ArrayList<>();
 
-    private TextView txtPostoNome, txtPostoSetor, txtAtivos, txtEntregues, txtVazio;
-    private LinearLayout lista;
+    private TextView txtPostoNome, txtPostoSetor, txtAtivos,
+            txtEntregues, txtVazio;
+
+    private RecyclerView lista;
+    private CartaoAndamentoAdapter adapter;
+
     private ListenerRegistration regCartoes, regConcluidos;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
+
     private final Runnable tick = new Runnable() {
-        @Override public void run() {
-            renderizar(); // os minutos mudam com o tempo
+        @Override
+        public void run() {
+            renderizar();
             handler.postDelayed(this, 30_000);
         }
     };
@@ -48,11 +57,18 @@ public class OperadorHomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
+
         postoId = Sessao.postoId(this);
+
         setContentView(R.layout.activity_operador_home);
 
-        Visual.ajustarInsets(findViewById(R.id.raiz), findViewById(R.id.navInferior));
+        Visual.ajustarInsets(
+                findViewById(R.id.raiz),
+                findViewById(R.id.navInferior)
+        );
+
         NavInferior.configurar(this, NavInferior.INICIO);
 
         txtPostoNome = findViewById(R.id.txtPostoNome);
@@ -60,87 +76,173 @@ public class OperadorHomeActivity extends AppCompatActivity {
         txtAtivos = findViewById(R.id.txtAtivos);
         txtEntregues = findViewById(R.id.txtEntregues);
         txtVazio = findViewById(R.id.txtVazio);
+
         lista = findViewById(R.id.listaAndamento);
 
+        lista.setLayoutManager(new LinearLayoutManager(this));
+        lista.setNestedScrollingEnabled(false);
+
+        adapter = new CartaoAndamentoAdapter(cartao ->
+                CartaoDetalheActivity.abrir(
+                        this,
+                        cartao.postoId,
+                        cartao.insumoId
+                )
+        );
+
+        lista.setAdapter(adapter);
+
         findViewById(R.id.btnPedir).setOnClickListener(v ->
-                PedirReposicaoActivity.abrir(this, postoId));
+                PedirReposicaoActivity.abrir(this, postoId)
+        );
+
         findViewById(R.id.contaOperador).setOnClickListener(v -> {
-            android.widget.PopupMenu menu = new android.widget.PopupMenu(this, v);
-            menu.getMenu().add("Sair da conta").setOnMenuItemClickListener(item -> { Sessao.sair(this); return true; });
+
+            PopupMenu menu = new PopupMenu(this, v);
+
+            menu.getMenu().add("Trocar de posto")
+                    .setOnMenuItemClickListener(item -> {
+
+                        pararEscutas();
+
+                        Intent intent = new Intent(
+                                OperadorHomeActivity.this,
+                                LoginActivity.class
+                        );
+
+                        intent.addFlags(
+                                Intent.FLAG_ACTIVITY_NEW_TASK |
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        );
+
+                        startActivity(intent);
+                        finish();
+
+                        return true;
+                    });
+
+            menu.getMenu().add("Sair da conta")
+                    .setOnMenuItemClickListener(item -> {
+
+                        pararEscutas();
+                        Sessao.sair(this);
+
+                        return true;
+                    });
+
             menu.show();
         });
-        findViewById(R.id.btnVerTodos).setOnClickListener(v ->
-                startActivity(new Intent(this, MeusCartoesActivity.class)));
 
-        CartoesService.get().buscarPosto(postoId).addOnSuccessListener(p -> {
-            if (p == null) return;
-            postoNome = p.nome;
-            txtPostoNome.setText(p.nome);
-            txtPostoSetor.setText(p.setor);
-        });
+        findViewById(R.id.btnVerTodos).setOnClickListener(v ->
+                startActivity(new Intent(this, MeusCartoesActivity.class))
+        );
+
+        CartoesService.get().buscarPosto(postoId)
+                .addOnSuccessListener(p -> {
+                    if (p == null) return;
+
+                    postoNome = p.nome;
+                    txtPostoNome.setText(p.nome);
+                    txtPostoSetor.setText(p.setor);
+                });
+
         renderizar();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         if (!Sessao.exigir(this, Constantes.PERFIL_OPERADOR)) return;
+
         CartoesService s = CartoesService.get();
 
-        regCartoes = s.escutarCartoesDoPosto(postoId, new Ouvinte<Cartao>() {
-            @Override public void aoReceber(List<Cartao> itens) {
-                ativos = new ArrayList<>(itens);
-                Collections.sort(ativos, (a, b) -> Long.compare(Visual.millis(a.abertoEm), Visual.millis(b.abertoEm)));
-                renderizar();
-            }
-            @Override public void aoErrar(Exception e) { Visual.erro(OperadorHomeActivity.this, "Erro nos cartões", e); }
-        });
-        regConcluidos = s.escutarConcluidosHoje(postoId, new Ouvinte<Atendimento>() {
-            @Override public void aoReceber(List<Atendimento> itens) {
-                concluidos = itens;
-                renderizar();
-            }
-            // Esta consulta (postoId + concluidoEm) pede um índice composto no Firestore:
-            // o erro no Logcat traz o link para criá-lo com um clique.
-            @Override public void aoErrar(Exception e) { Visual.erro(OperadorHomeActivity.this, "Erro nos concluídos", e); }
-        });
+        regCartoes = s.escutarCartoesDoPosto(postoId,
+                new Ouvinte<Cartao>() {
+
+                    @Override
+                    public void aoReceber(List<Cartao> itens) {
+                        ativos = new ArrayList<>(itens);
+
+                        Collections.sort(ativos, (a, b) ->
+                                Long.compare(
+                                        Visual.millis(a.abertoEm),
+                                        Visual.millis(b.abertoEm)
+                                )
+                        );
+
+                        renderizar();
+                    }
+
+                    @Override
+                    public void aoErrar(Exception e) {
+                        Visual.erro(
+                                OperadorHomeActivity.this,
+                                "Erro nos cartões",
+                                e
+                        );
+                    }
+                });
+
+        regConcluidos = s.escutarConcluidosHoje(postoId,
+                new Ouvinte<Atendimento>() {
+
+                    @Override
+                    public void aoReceber(List<Atendimento> itens) {
+                        concluidos = new ArrayList<>(itens);
+                        renderizar();
+                    }
+
+                    @Override
+                    public void aoErrar(Exception e) {
+                        Visual.erro(
+                                OperadorHomeActivity.this,
+                                "Erro nos concluídos",
+                                e
+                        );
+                    }
+                });
+
+        handler.removeCallbacks(tick);
         handler.postDelayed(tick, 30_000);
+    }
+
+    private void pararEscutas() {
+
+        if (regCartoes != null) {
+            regCartoes.remove();
+            regCartoes = null;
+        }
+
+        if (regConcluidos != null) {
+            regConcluidos.remove();
+            regConcluidos = null;
+        }
+
+        handler.removeCallbacks(tick);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (regCartoes != null) regCartoes.remove();
-        if (regConcluidos != null) regConcluidos.remove();
-        handler.removeCallbacks(tick);
+        pararEscutas();
     }
 
     private void renderizar() {
+
         txtAtivos.setText(String.valueOf(ativos.size()));
         txtEntregues.setText(String.valueOf(concluidos.size()));
 
-        lista.removeAllViews();
         int n = Math.min(MAX_EM_ANDAMENTO, ativos.size());
-        for (int i = 0; i < n; i++) {
-            Cartao c = ativos.get(i);
-            View item = getLayoutInflater().inflate(R.layout.item_cartao_andamento, lista, false);
 
-            Visual.aplicarBarra(item.findViewById(R.id.barra), c.urgencia);
-            ((TextView) item.findViewById(R.id.txtInsumo)).setText(c.insumoNome);
-            ((TextView) item.findViewById(R.id.txtSub)).setText(
-                    Visual.rotuloStatus(c.status) + " · há " + c.minutosAberto() + " min");
+        List<Cartao> exibidos = new ArrayList<>(
+                ativos.subList(0, n)
+        );
 
-            // C5: só o cartão entregue pede confirmação
-            TextView chip = item.findViewById(R.id.chipConfirmar);
-            if (Constantes.STATUS_ENTREGUE.equals(c.status)) {
-                chip.setVisibility(View.VISIBLE);
-                Visual.chip(chip, "Confirmar",
-                        android.graphics.Color.parseColor("#CFE0FB"),
-                        android.graphics.Color.parseColor("#1E4E9A"));
-            }
-            item.setOnClickListener(v -> CartaoDetalheActivity.abrir(this, c.postoId, c.insumoId));
-            lista.addView(item);
-        }
-        txtVazio.setVisibility(ativos.isEmpty() ? View.VISIBLE : View.GONE);
+        adapter.atualizar(exibidos);
+
+        txtVazio.setVisibility(
+                ativos.isEmpty() ? View.VISIBLE : View.GONE
+        );
     }
 }
