@@ -394,29 +394,44 @@ Além das funcionalidades principais, o aplicativo contempla os seguintes requis
 
 ## 13. Evidências do aplicativo
 
-As imagens abaixo apresentam as principais telas e funcionalidades do aplicativo.
+As imagens abaixo apresentam as principais telas e funcionalidades do aplicativo Kanban de Reposição.
 
 ### Tela de login
-![Tela de login](docs/screenshots/login.jpeg)
+
+<p align="center">
+  <img src="docs/screenshots/login.jpeg" width="400" alt="Tela de login">
+</p>
 
 ### Cadastro de usuário
-![Cadastro de usuário](docs/screenshots/cadastro.jpeg)
+
+<p align="center">
+  <img src="docs/screenshots/cadastro.jpeg" width="400" alt="Cadastro de usuário">
+</p>
 
 ### Tela do operador
-![Tela do operador](docs/screenshots/operador.jpeg)
+
+<p align="center">
+  <img src="docs/screenshots/operador.jpeg" width="400" alt="Tela do operador">
+</p>
 
 ### Cadastro de insumo
-![Cadastro de insumo](docs/screenshots/novo-insumo.jpeg)
+
+<p align="center">
+  <img src="docs/screenshots/novo-insumo.jpeg" width="400" alt="Cadastro de insumo">
+</p>
 
 ### Quadro da logística
-![Quadro da logística](docs/screenshots/quadro-logistica.jpeg)
 
-### Cartões em atendimento
-![Cartões em atendimento](docs/screenshots/cartoes.jpeg)
+<p align="center">
+  <img src="docs/screenshots/quadro-logistica.jpeg" width="400" alt="Quadro da logística">
+</p>
 
-As capturas mostram telas reais do aplicativo, sem expor senhas ou informações privadas.
+### Cartões de reposição
 
-As capturas devem mostrar as telas reais do aplicativo, sem expor senhas, dados pessoais ou informações privadas.
+<p align="center">
+  <img src="docs/screenshots/cartoes.jpeg" width="400" alt="Cartões de reposição">
+</p>
+
 
 ## 14. Contas para teste
 
