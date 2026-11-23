@@ -13,9 +13,8 @@ Aplicativo Android que digitaliza a solicitação e a reposição de insumos em 
 5. [Engenharia de Software (ES1 e ES2)](#5-engenharia-de-software)
 6. [Requisitos não funcionais](#6-requisitos-não-funcionais)
 7. [Evidências](#7-evidências)
-8. [Contas para teste](#8-contas-para-teste)
-9. [Estrutura do repositório](#9-estrutura-do-repositório)
-10. [Equipe](#10-equipe)
+8. [Estrutura do repositório](#9-estrutura-do-repositório)
+9. [Equipe](#10-equipe)
 
 ---
 
@@ -167,15 +166,6 @@ O acompanhamento foi feito no [GitHub Projects](https://github.com/users/oricoMi
 | Novo insumo | Quadro da logística | Cartões |
 |:---:|:---:|:---:|
 | <img src="docs/screenshots/novo-insumo.jpeg" width="200" alt="Cadastro de insumo"> | <img src="docs/screenshots/quadro-logistica.jpeg" width="200" alt="Quadro da logística"> | <img src="docs/screenshots/cartoes.jpeg" width="200" alt="Cartões de reposição"> |
-
-## 8. Contas para teste
-
-| Perfil | E-mail | Senha |
-|---|---|---|
-| Operador | _preencher_ | Informada ao avaliador por canal privado |
-| Logística | _preencher_ | Informada ao avaliador por canal privado |
-
-As contas precisam existir no Firebase Authentication, e a de logística deve ter `perfil: logistica` no Firestore. Não publique senhas neste repositório.
 
 ## 9. Estrutura do repositório
 
