@@ -167,7 +167,7 @@ O acompanhamento foi feito no [GitHub Projects](https://github.com/users/oricoMi
 |:---:|:---:|:---:|
 | <img src="docs/screenshots/novo-insumo.jpeg" width="200" alt="Cadastro de insumo"> | <img src="docs/screenshots/quadro-logistica.jpeg" width="200" alt="Quadro da logística"> | <img src="docs/screenshots/cartoes.jpeg" width="200" alt="Cartões de reposição"> |
 
-## 9. Estrutura do repositório
+## 8. Estrutura do repositório
 
 ```text
 Kanban-Mobile/
@@ -184,7 +184,7 @@ Kanban-Mobile/
 └── README.md
 ```
 
-## 10. Equipe
+## 9. Equipe
 
 | Integrante | Participação |
 |---|---|
