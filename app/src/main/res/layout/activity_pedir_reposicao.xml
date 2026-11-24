@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/raiz" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FAFAFA" android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@drawable/bg_form_panel" android:padding="20dp">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+            <ImageButton android:id="@+id/voltar" android:layout_width="40dp" android:layout_height="48dp" android:src="@drawable/ic_arrow_back" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Voltar"/>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                <TextView style="@style/FormularioTitulo" android:text="Pedir reposição"/>
+                <TextView android:id="@+id/postoPedido" style="@style/FormularioRotulo" android:text="Posto de trabalho" android:layout_marginTop="2dp" android:layout_marginBottom="0dp"/>
+            </LinearLayout>
+            <ImageButton android:id="@+id/lerQr" android:layout_width="40dp" android:layout_height="48dp" android:src="@drawable/ic_qr" android:background="?attr/selectableItemBackgroundBorderless" android:contentDescription="Ler QR do posto"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="16dp" android:background="#EEEEEE"/>
+        <TextView style="@style/FormularioSecao" android:text="O que está acabando?"/>
+        <androidx.recyclerview.widget.RecyclerView android:id="@+id/insumosPedido" android:layout_width="match_parent" android:layout_height="wrap_content" android:nestedScrollingEnabled="false" android:minHeight="96dp"/>
+        <TextView android:id="@+id/statusPedido" style="@style/FormularioRotulo" android:accessibilityLiveRegion="polite"/>
+        <TextView style="@style/FormularioSecao" android:text="Qual a urgência?"/>
+        <RadioGroup android:id="@+id/urgenciaPedido" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/urgenciaBaixa" style="@style/FormularioUrgencia" android:text="Baixa" android:layout_marginEnd="8dp"/>
+            <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/urgenciaMedia" style="@style/FormularioUrgencia" android:text="Média" android:layout_marginEnd="8dp"/>
+            <androidx.appcompat.widget.AppCompatRadioButton android:id="@+id/urgenciaAlta" style="@style/FormularioUrgencia" android:text="Alta"/>
+        </RadioGroup>
+        <TextView android:id="@+id/ajudaUrgencia" style="@style/FormularioRotulo" android:textSize="12sp"/>
+        <androidx.appcompat.widget.AppCompatButton android:id="@+id/enviarPedido" style="@style/FormularioBotao" android:text="Pedir reposição"/>
+    </LinearLayout>
+</ScrollView>

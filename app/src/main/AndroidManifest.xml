@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,15 +17,65 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Kanban">
+
         <activity
-            android:name=".MainActivity"
+            android:name=".auth.LoginActivity"
+            android:theme="@style/Theme.Kanban.Formulario"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".logistica.QuadroActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.PedirReposicaoActivity"
+            android:theme="@style/Theme.Kanban.Formulario"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.LerQrActivity"
+            android:theme="@style/Theme.Kanban.Formulario"
+            android:exported="false" />
+
+        <activity
+            android:name=".logistica.TempoAtendimentoActivity"
+            android:exported="false" />
+
+        <!-- Telas do operador -->
+        <activity
+            android:name=".operador.OperadorHomeActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.MeusCartoesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".operador.CartaoDetalheActivity"
+            android:exported="false" />
+
+        <!-- Telas da logística -->
+        <activity
+            android:name=".logistica.PostosTrabalhoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".logistica.NovoInsumoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".logistica.NovoPostoActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".logistica.PostoInsumosActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

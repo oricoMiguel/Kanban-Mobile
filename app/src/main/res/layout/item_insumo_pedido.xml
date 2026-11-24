@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="108dp" android:layout_margin="4dp" android:background="@drawable/bg_insumo_tile" android:padding="12dp" android:orientation="vertical" android:clickable="true" android:focusable="true">
+    <ImageView android:layout_width="24dp" android:layout_height="24dp" android:src="@drawable/ic_insumo_form" android:importantForAccessibility="no" android:id="@+id/iconeInsumo"/>
+    <TextView android:id="@+id/nomeInsumo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textColor="#111111" android:textStyle="bold" android:textSize="15sp"/>
+    <TextView android:id="@+id/unidadeInsumo" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textColor="#444444" android:textSize="12sp"/>
+    <TextView android:id="@+id/pedidoExistente" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:textColor="#946000" android:textSize="12sp" android:visibility="gone"/>
+</LinearLayout>

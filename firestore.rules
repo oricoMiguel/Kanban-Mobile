@@ -1,0 +1,70 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function perfil() {
+      return request.auth != null
+        ? get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.perfil : '';
+    }
+    function operador() { return perfil() == 'operador'; }
+    function logistica() { return perfil() == 'logistica'; }
+    function membro() { return operador() || logistica(); }
+
+    // O app nunca cria ou altera o próprio perfil. A equipe faz isso no console.
+    match /usuarios/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, write: if false;
+    }
+    match /postos/{id} {
+      allow read: if membro();
+      allow create, update: if logistica()
+        && request.resource.data.nome is string && request.resource.data.nome.size() > 0
+        && request.resource.data.setor is string && request.resource.data.ativo is bool;
+      allow delete: if false;
+    }
+    match /insumos/{id} {
+      allow read: if membro();
+      allow create, update: if logistica()
+        && request.resource.data.nome is string && request.resource.data.nome.size() > 0
+        && request.resource.data.codigo is string && request.resource.data.unidade is string
+        && request.resource.data.postoIds is list;
+      allow delete: if false;
+    }
+    match /cartoes/{id} {
+      allow read: if membro();
+      allow create: if operador()
+        && request.resource.data.keys().hasOnly(['postoId', 'postoNome', 'insumoId', 'insumoNome',
+             'urgencia', 'status', 'abertoEm', 'emRotaEm', 'entregueEm'])
+        && id == request.resource.data.postoId + '_' + request.resource.data.insumoId
+        && request.resource.data.status == 'aberto'
+        && request.resource.data.urgencia in ['baixa', 'media', 'alta']
+        && request.resource.data.abertoEm == request.time
+        && request.resource.data.emRotaEm == null && request.resource.data.entregueEm == null
+        && get(/databases/$(database)/documents/postos/$(request.resource.data.postoId)).data.ativo == true
+        && request.resource.data.postoNome == get(/databases/$(database)/documents/postos/$(request.resource.data.postoId)).data.nome
+        && request.resource.data.postoId in get(/databases/$(database)/documents/insumos/$(request.resource.data.insumoId)).data.postoIds
+        && request.resource.data.insumoNome == get(/databases/$(database)/documents/insumos/$(request.resource.data.insumoId)).data.nome;
+      allow update: if logistica() && (
+        (resource.data.status == 'aberto' && request.resource.data.status == 'em_rota'
+          && request.resource.data.emRotaEm == request.time
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'emRotaEm']))
+        || (resource.data.status == 'em_rota' && request.resource.data.status == 'entregue'
+          && request.resource.data.entregueEm == request.time
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'entregueEm']))
+      );
+      allow delete: if operador() && resource.data.status == 'entregue';
+    }
+    match /atendimentos/{id} {
+      function original() {
+        return get(/databases/$(database)/documents/cartoes/$(request.resource.data.postoId + '_' + request.resource.data.insumoId)).data;
+      }
+      allow read: if membro();
+      allow create: if operador()
+        && original().status == 'entregue'
+        && request.resource.data.diff(original()).affectedKeys().hasOnly(['concluidoEm', 'minutosTotal'])
+        && request.resource.data.concluidoEm is timestamp
+        && request.resource.data.minutosTotal is int && request.resource.data.minutosTotal >= 0
+        && !existsAfter(/databases/$(database)/documents/cartoes/$(request.resource.data.postoId + '_' + request.resource.data.insumoId));
+      allow update, delete: if false;
+    }
+  }
+}
